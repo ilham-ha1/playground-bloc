@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:playground_bloc/core/route/route_constants.dart';
+
 import '../bloc/todo_bloc.dart';
 import '../bloc/todo_event.dart';
 import '../bloc/todo_state.dart';
-import '../widgets/todo_item.dart';
 import '../widgets/add_todo_dialog.dart';
+import '../widgets/todo_item.dart';
 
 class TodoListScreen extends StatefulWidget {
   const TodoListScreen({super.key});
@@ -28,17 +30,32 @@ class _TodoListScreenState extends State<TodoListScreen> {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         elevation: 0,
+        actions: [
+          InkWell(
+            child: Icon(Icons.navigate_next_outlined),
+            onTap: () {
+              Navigator.pushNamed(context, RouteConstants.reimburstment);
+            },
+          ),
+          SizedBox(width: 12),
+        ],
       ),
       body: BlocConsumer<TodoBloc, TodoState>(
         listener: (context, state) {
           if (state is TodoError) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message), backgroundColor: Colors.red));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
           } else if (state is TodoSuccess) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message), backgroundColor: Colors.green));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.green,
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -52,7 +69,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   children: [
                     Icon(Icons.task_alt, size: 64, color: Colors.grey),
                     SizedBox(height: 16),
-                    Text('No todos yet', style: TextStyle(fontSize: 18, color: Colors.grey)),
+                    Text(
+                      'No todos yet',
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
                     SizedBox(height: 8),
                     Text(
                       'Tap the + button to add your first todo',
@@ -102,8 +122,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
           showDialog(
             context: context,
             builder:
-                (dialogContext) =>
-                    BlocProvider.value(value: todoBloc, child: const AddTodoDialog()),
+                (dialogContext) => BlocProvider.value(
+                  value: todoBloc,
+                  child: const AddTodoDialog(),
+                ),
           );
         },
         child: const Icon(Icons.add),
