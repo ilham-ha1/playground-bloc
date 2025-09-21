@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mockito/mockito.dart';
-import 'package:playground_bloc/domain/entities/todo.dart';
-import 'package:playground_bloc/presentation/bloc/todo_bloc.dart';
-import 'package:playground_bloc/presentation/bloc/todo_state.dart';
+import 'package:playground_bloc/features/todo/domain/entities/todo.dart';
+import 'package:playground_bloc/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:playground_bloc/features/todo/presentation/bloc/todo_state.dart';
 
 /// Mock classes for testing
 class MockTodoBloc extends Mock implements TodoBloc {}
