@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../domain/usecases/create_todo.dart' as create_todo;
 import '../../domain/usecases/delete_todo.dart' as delete_todo;
 import '../../domain/usecases/get_all_todos.dart';
@@ -36,11 +37,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     emit(TodoLoading());
 
     final result = await getAllTodos();
-    result.fold((failure) => emit(TodoError(failure)), (todos) => emit(TodoLoaded(todos)));
+    result.fold(
+      (failure) => emit(TodoError(failure)),
+      (todos) => emit(TodoLoaded(todos)),
+    );
   }
 
   Future<void> _onCreateTodo(CreateTodo event, Emitter<TodoState> emit) async {
-    final result = await createTodo(title: event.title, description: event.description);
+    final result = await createTodo(
+      title: event.title,
+      description: event.description,
+    );
 
     result.fold((failure) => emit(TodoError(failure)), (todo) {
       emit(const TodoSuccess('Todo created successfully'));
@@ -66,7 +73,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     });
   }
 
-  Future<void> _onToggleTodoCompletion(ToggleTodoCompletion event, Emitter<TodoState> emit) async {
+  Future<void> _onToggleTodoCompletion(
+    ToggleTodoCompletion event,
+    Emitter<TodoState> emit,
+  ) async {
     final result = await toggleTodoCompletion(event.todo);
 
     result.fold((failure) => emit(TodoError(failure)), (todo) {
