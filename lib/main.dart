@@ -16,25 +16,28 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Todo List App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-        appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
-        cardTheme: const CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
+    return MultiBlocProvider(
+      providers: [],
+      child: MaterialApp(
+        title: 'Todo List App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
+          cardTheme: const CardThemeData(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            elevation: 4,
           ),
         ),
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          elevation: 4,
+        home: BlocProvider(
+          create: (context) => sl<TodoBloc>(),
+          child: const TodoListScreen(),
         ),
-      ),
-      home: BlocProvider(
-        create: (context) => sl<TodoBloc>(),
-        child: const TodoListScreen(),
       ),
     );
   }
