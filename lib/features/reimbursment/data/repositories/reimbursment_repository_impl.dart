@@ -40,6 +40,7 @@ class ReimbursmentRepositoryImpl implements ReimbursmentRepository {
       final entities = models
           .map(
             (model) => BossesEntity(
+              id: model.id,
               name: model.name,
               role: model.role,
               status: model.status,

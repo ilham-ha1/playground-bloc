@@ -8,6 +8,7 @@ part of 'bosses_entity.dart';
 
 _BossesEntity _$BossesEntityFromJson(Map<String, dynamic> json) =>
     _BossesEntity(
+      id: json['id'] as String?,
       name: json['name'] as String?,
       role: json['role'] as String?,
       status: json['status'] as String?,
@@ -18,6 +19,7 @@ _BossesEntity _$BossesEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BossesEntityToJson(_BossesEntity instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'role': instance.role,
       'status': instance.status,

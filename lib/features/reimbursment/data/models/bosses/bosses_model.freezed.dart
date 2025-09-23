@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BossesModel {
 
- String? get name; String? get role; String? get status; DateTime? get date; String? get avatarUrl;
+ String? get id; String? get name; String? get role; String? get status; DateTime? get date; String? get avatarUrl;
 /// Create a copy of BossesModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $BossesModelCopyWith<BossesModel> get copyWith => _$BossesModelCopyWithImpl<Boss
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BossesModel&&(identical(other.name, name) || other.name == name)&&(identical(other.role, role) || other.role == role)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BossesModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.role, role) || other.role == role)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,role,status,date,avatarUrl);
+int get hashCode => Object.hash(runtimeType,id,name,role,status,date,avatarUrl);
 
 @override
 String toString() {
-  return 'BossesModel(name: $name, role: $role, status: $status, date: $date, avatarUrl: $avatarUrl)';
+  return 'BossesModel(id: $id, name: $name, role: $role, status: $status, date: $date, avatarUrl: $avatarUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $BossesModelCopyWith<$Res>  {
   factory $BossesModelCopyWith(BossesModel value, $Res Function(BossesModel) _then) = _$BossesModelCopyWithImpl;
 @useResult
 $Res call({
- String? name, String? role, String? status, DateTime? date, String? avatarUrl
+ String? id, String? name, String? role, String? status, DateTime? date, String? avatarUrl
 });
 
 
@@ -65,9 +65,10 @@ class _$BossesModelCopyWithImpl<$Res>
 
 /// Create a copy of BossesModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? role = freezed,Object? status = freezed,Object? date = freezed,Object? avatarUrl = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? role = freezed,Object? status = freezed,Object? date = freezed,Object? avatarUrl = freezed,}) {
   return _then(_self.copyWith(
-name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BossesModel() when $default != null:
-return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
+return $default(_that.id,_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)  $default,) {final _that = this;
 switch (_that) {
 case _BossesModel():
-return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
+return $default(_that.id,_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? name,  String? role,  String? status,  DateTime? date,  String? avatarUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _BossesModel() when $default != null:
-return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
+return $default(_that.id,_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);case _:
   return null;
 
 }
@@ -213,9 +214,10 @@ return $default(_that.name,_that.role,_that.status,_that.date,_that.avatarUrl);c
 @JsonSerializable()
 
 class _BossesModel implements BossesModel {
-  const _BossesModel({this.name, this.role, this.status, this.date, this.avatarUrl});
+  const _BossesModel({this.id, this.name, this.role, this.status, this.date, this.avatarUrl});
   factory _BossesModel.fromJson(Map<String, dynamic> json) => _$BossesModelFromJson(json);
 
+@override final  String? id;
 @override final  String? name;
 @override final  String? role;
 @override final  String? status;
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BossesModel&&(identical(other.name, name) || other.name == name)&&(identical(other.role, role) || other.role == role)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BossesModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.role, role) || other.role == role)&&(identical(other.status, status) || other.status == status)&&(identical(other.date, date) || other.date == date)&&(identical(other.avatarUrl, avatarUrl) || other.avatarUrl == avatarUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,role,status,date,avatarUrl);
+int get hashCode => Object.hash(runtimeType,id,name,role,status,date,avatarUrl);
 
 @override
 String toString() {
-  return 'BossesModel(name: $name, role: $role, status: $status, date: $date, avatarUrl: $avatarUrl)';
+  return 'BossesModel(id: $id, name: $name, role: $role, status: $status, date: $date, avatarUrl: $avatarUrl)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$BossesModelCopyWith<$Res> implements $BossesModelCopyWith
   factory _$BossesModelCopyWith(_BossesModel value, $Res Function(_BossesModel) _then) = __$BossesModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? name, String? role, String? status, DateTime? date, String? avatarUrl
+ String? id, String? name, String? role, String? status, DateTime? date, String? avatarUrl
 });
 
 
@@ -272,9 +274,10 @@ class __$BossesModelCopyWithImpl<$Res>
 
 /// Create a copy of BossesModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? role = freezed,Object? status = freezed,Object? date = freezed,Object? avatarUrl = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? role = freezed,Object? status = freezed,Object? date = freezed,Object? avatarUrl = freezed,}) {
   return _then(_BossesModel(
-name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable

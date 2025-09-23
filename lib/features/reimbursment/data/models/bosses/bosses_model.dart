@@ -19,6 +19,7 @@ String bossesModelToJson(List<BossesModel> data) =>
 @freezed
 abstract class BossesModel with _$BossesModel {
   const factory BossesModel({
+    String? id,
     String? name,
     String? role,
     String? status,

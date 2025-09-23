@@ -8,7 +8,6 @@ abstract class BossesState extends Equatable {
   List<Object?> get props => [];
 }
 
-//HIT ENDPOINT GET REIMBURSTMENT TYPE
 class BossesInitial extends BossesState {}
 
 class BossesLoading extends BossesState {}

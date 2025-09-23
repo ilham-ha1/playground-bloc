@@ -7,6 +7,7 @@ part of 'bosses_model.dart';
 // **************************************************************************
 
 _BossesModel _$BossesModelFromJson(Map<String, dynamic> json) => _BossesModel(
+  id: json['id'] as String?,
   name: json['name'] as String?,
   role: json['role'] as String?,
   status: json['status'] as String?,
@@ -16,6 +17,7 @@ _BossesModel _$BossesModelFromJson(Map<String, dynamic> json) => _BossesModel(
 
 Map<String, dynamic> _$BossesModelToJson(_BossesModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'role': instance.role,
       'status': instance.status,

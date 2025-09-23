@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:playground_bloc/features/todo/data/datasources/database_helper.dart';
-import 'package:playground_bloc/features/todo/data/models/todo_model.dart';
 import 'package:playground_bloc/features/todo/data/repositories/todo_repository_impl.dart';
 import 'package:playground_bloc/features/todo/domain/entities/todo.dart';
 import 'package:sqflite/sqflite.dart';
@@ -74,13 +73,16 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, List<Todo>>>());
-        result.fold((failure) => fail('Expected success but got failure: $failure'), (todos) {
-          expect(todos.length, 2);
-          expect(todos[0].id, 1);
-          expect(todos[0].title, 'Test Todo 1');
-          expect(todos[1].id, 2);
-          expect(todos[1].title, 'Test Todo 2');
-        });
+        result.fold(
+          (failure) => fail('Expected success but got failure: $failure'),
+          (todos) {
+            expect(todos.length, 2);
+            expect(todos[0].id, 1);
+            expect(todos[0].title, 'Test Todo 1');
+            expect(todos[1].id, 2);
+            expect(todos[1].title, 'Test Todo 2');
+          },
+        );
         verify(mockDatabaseHelper.database);
         verify(mockDatabase.query('todos', orderBy: 'createdAt DESC'));
       });
@@ -118,10 +120,13 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, Todo>>());
-        result.fold((failure) => fail('Expected success but got failure: $failure'), (todo) {
-          expect(todo.id, 1);
-          expect(todo.title, 'Test Todo 1');
-        });
+        result.fold(
+          (failure) => fail('Expected success but got failure: $failure'),
+          (todo) {
+            expect(todo.id, 1);
+            expect(todo.title, 'Test Todo 1');
+          },
+        );
       });
 
       test('should return failure when todo not found', () async {
@@ -156,10 +161,13 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, Todo>>());
-        result.fold((failure) => fail('Expected success but got failure: $failure'), (todo) {
-          expect(todo.id, 1);
-          expect(todo.title, testTodo.title);
-        });
+        result.fold(
+          (failure) => fail('Expected success but got failure: $failure'),
+          (todo) {
+            expect(todo.id, 1);
+            expect(todo.title, testTodo.title);
+          },
+        );
         verify(mockDatabase.insert('todos', any));
       });
 
@@ -167,7 +175,9 @@ void main() {
         // Arrange
         final testTodo = testTodos[0];
         when(mockDatabaseHelper.database).thenAnswer((_) async => mockDatabase);
-        when(mockDatabase.insert('todos', any)).thenThrow(Exception('Insert error'));
+        when(
+          mockDatabase.insert('todos', any),
+        ).thenThrow(Exception('Insert error'));
 
         // Act
         final result = await repository.createTodo(testTodo);
@@ -187,7 +197,12 @@ void main() {
         final testTodo = testTodos[0];
         when(mockDatabaseHelper.database).thenAnswer((_) async => mockDatabase);
         when(
-          mockDatabase.update('todos', any, where: 'id = ?', whereArgs: [testTodo.id]),
+          mockDatabase.update(
+            'todos',
+            any,
+            where: 'id = ?',
+            whereArgs: [testTodo.id],
+          ),
         ).thenAnswer((_) async => 1);
 
         // Act
@@ -199,7 +214,14 @@ void main() {
           (failure) => fail('Expected success but got failure: $failure'),
           (todo) => expect(todo, testTodo),
         );
-        verify(mockDatabase.update('todos', any, where: 'id = ?', whereArgs: [testTodo.id]));
+        verify(
+          mockDatabase.update(
+            'todos',
+            any,
+            where: 'id = ?',
+            whereArgs: [testTodo.id],
+          ),
+        );
       });
     });
 
@@ -217,7 +239,9 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, void>>());
-        verify(mockDatabase.delete('todos', where: 'id = ?', whereArgs: [testId]));
+        verify(
+          mockDatabase.delete('todos', where: 'id = ?', whereArgs: [testId]),
+        );
       });
     });
 
@@ -239,10 +263,13 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, List<Todo>>>());
-        result.fold((failure) => fail('Expected success but got failure: $failure'), (todos) {
-          expect(todos.length, 1);
-          expect(todos[0].isCompleted, true);
-        });
+        result.fold(
+          (failure) => fail('Expected success but got failure: $failure'),
+          (todos) {
+            expect(todos.length, 1);
+            expect(todos[0].isCompleted, true);
+          },
+        );
       });
     });
 
@@ -264,10 +291,13 @@ void main() {
 
         // Assert
         expect(result, isA<Right<String, List<Todo>>>());
-        result.fold((failure) => fail('Expected success but got failure: $failure'), (todos) {
-          expect(todos.length, 1);
-          expect(todos[0].isCompleted, false);
-        });
+        result.fold(
+          (failure) => fail('Expected success but got failure: $failure'),
+          (todos) {
+            expect(todos.length, 1);
+            expect(todos[0].isCompleted, false);
+          },
+        );
       });
     });
   });
