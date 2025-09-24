@@ -6,8 +6,6 @@ import 'package:playground_bloc/features/reimbursment/presentation/bloc/reimburs
 
 import '../data/repositories/reimbursment_repository_impl.dart';
 import '../domain/repositories/reimbursment_repository.dart';
-import '../presentation/bloc/bosses/bosses_bloc.dart';
-import '../presentation/bloc/types/types_bloc.dart';
 
 class ReimbursmentDi extends IconfigureDependencies {
   @override
@@ -20,9 +18,12 @@ class ReimbursmentDi extends IconfigureDependencies {
 
   @override
   injectBloc() {
-    sl.registerFactory(() => TypesBloc(getTypes: sl()));
-    sl.registerFactory(() => BossesBloc(getBosses: sl()));
-    sl.registerFactory(() => ReimbursmentBloc());
+    sl.registerFactory(
+      () => ReimbursmentBloc(
+        getTypes: sl(),
+        getBosses: sl(),
+      ),
+    );
   }
 
   @override
