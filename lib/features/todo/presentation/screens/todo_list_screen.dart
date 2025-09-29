@@ -32,9 +32,16 @@ class _TodoListScreenState extends State<TodoListScreen> {
         elevation: 0,
         actions: [
           InkWell(
-            child: Icon(Icons.navigate_next_outlined),
+            child: Icon(Icons.note_add_sharp),
             onTap: () {
               Navigator.pushNamed(context, RouteConstants.reimburstment);
+            },
+          ),
+          SizedBox(width: 12),
+          InkWell(
+            child: Icon(Icons.chat),
+            onTap: () {
+              Navigator.pushNamed(context, RouteConstants.questionere);
             },
           ),
           SizedBox(width: 12),

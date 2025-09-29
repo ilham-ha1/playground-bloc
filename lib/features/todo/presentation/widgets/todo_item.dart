@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../domain/entities/todo.dart';
 import '../bloc/todo_bloc.dart';
 import '../bloc/todo_event.dart';
@@ -42,7 +43,8 @@ class TodoItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: todo.isCompleted ? Colors.grey : Colors.grey[600],
-                decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+                decoration:
+                    todo.isCompleted ? TextDecoration.lineThrough : null,
               ),
             ),
             const SizedBox(height: 8),
@@ -68,7 +70,11 @@ class TodoItem extends StatelessWidget {
                 const PopupMenuItem(
                   value: 'edit',
                   child: Row(
-                    children: [Icon(Icons.edit, size: 20), SizedBox(width: 8), Text('Edit')],
+                    children: [
+                      Icon(Icons.edit, size: 20),
+                      SizedBox(width: 8),
+                      Text('Edit'),
+                    ],
                   ),
                 ),
                 const PopupMenuItem(
@@ -118,10 +124,14 @@ class TodoItem extends StatelessWidget {
               ],
             ),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
-                  if (titleController.text.isNotEmpty && descriptionController.text.isNotEmpty) {
+                  if (titleController.text.isNotEmpty &&
+                      descriptionController.text.isNotEmpty) {
                     final updatedTodo = todo.copyWith(
                       title: titleController.text,
                       description: descriptionController.text,
@@ -145,7 +155,10 @@ class TodoItem extends StatelessWidget {
             title: const Text('Delete Todo'),
             content: const Text('Are you sure you want to delete this todo?'),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   context.read<TodoBloc>().add(DeleteTodo(todo.id!));
