@@ -45,6 +45,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
             },
           ),
           SizedBox(width: 12),
+          InkWell(
+            child: Icon(Icons.history),
+            onTap: () {
+              Navigator.pushNamed(context, RouteConstants.history);
+            },
+          ),
+          SizedBox(width: 12),
         ],
       ),
       body: BlocConsumer<TodoBloc, TodoState>(

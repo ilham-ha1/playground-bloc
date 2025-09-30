@@ -5,4 +5,5 @@ class RouteConstants {
   static const String reimburstment = '/reimbursment';
   static const String questionere = '/questionere';
   static const String photo = '/photo';
+  static const String history = '/history';
 }

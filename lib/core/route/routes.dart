@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:history/history_screen.dart';
 import 'package:playground_bloc/core/di/main_di.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
 import 'package:playground_bloc/features/questionere/presentation/bloc/questionere/questionere_bloc.dart';
@@ -63,7 +64,11 @@ class AppRouter {
             );
           },
         );
-
+      case RouteConstants.history:
+        return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => HistoryScreen(items: mockItemsHistory()),
+        );
       default:
         return MaterialPageRoute(
           settings: routeSettings,

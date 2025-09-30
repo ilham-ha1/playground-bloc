@@ -1,0 +1,134 @@
+# melos.yaml
+name: my_workspace
+
+# Root app lives at ".", NOT at "lib/"
+packages:
+- .
+- history
+- packages/* # optional: if you also keep more packages here
+
+command:
+  bootstrap:
+    runPubGetInParallel: true
+    usePubspecOverrides: true
+
+ide:
+  intellij:
+    enabled: true
+
+scripts:
+  # ---------- Core ----------
+  format:
+    run: melos exec -- dart format .
+    description: Format all packages
+
+  analyze:
+    run: |
+      melos exec -c 6 -- sh -c 'flutter analyze || dart analyze'
+    description: Analyze (Flutter or pure Dart)
+
+  test:
+    run: |
+      melos exec -c 1 --fail-fast -- sh -c '(flutter test -r expanded || dart test -r expanded)'
+    description: Run tests for all packages
+
+  coverage:
+    run: |
+      melos exec -c 1 --fail-fast --dir-exists test -- sh -c 'flutter test --coverage || dart test --coverage=coverage'
+    description: Generate coverage where tests exist
+
+  # ---------- Affected-only (CI speedups) ----------
+  analyze:changed:
+    run: |
+      melos exec --since origin/main -c 6 -- sh -c 'flutter analyze || dart analyze'
+    description: Analyze only changed packages since origin/main
+
+  test:changed:
+    run: |
+      melos exec --since origin/main -c 1 --fail-fast -- sh -c '(flutter test -r expanded || dart test -r expanded)'
+    description: Test only changed packages since origin/main
+
+  format:changed:
+    run: melos exec --since origin/main -- dart format .
+    description: Format only changed packages
+
+  # ---------- Codegen / Localization ----------
+  build_runner:
+    run: |
+      melos exec --file-exists build.yaml -- dart run build_runner build --delete-conflicting-outputs
+    description: Run build_runner for packages that declare build.yaml
+
+  build_runner:watch:
+    run: |
+      melos exec --file-exists build.yaml -- dart run build_runner watch --delete-conflicting-outputs
+    description: Watch mode for build_runner
+
+  l10n:
+    run: |
+      melos exec --file-exists "l10n.yaml" -- flutter gen-l10n
+    description: Run Flutter gen-l10n where l10n.yaml exists
+
+  # ---------- Dependency mgmt ----------
+  # Re-get deps for ALL packages (cross-platform)
+  pub:get:
+    run: melos exec -- flutter pub get
+    description: Get dependencies for all workspace packages
+
+  # Only changed packages since main (faster on CI/PRs)
+  pub:get:changed:
+    run: melos exec --since origin/main -- flutter pub get
+    description: Get dependencies only for changed packages
+
+  # Optional: pure Dart fallback (rarely needed)
+  pub:get:dart:
+    run: melos exec -- dart pub get
+    description: Use Dart's pub directly
+
+  # ---------- Cleanups ----------
+  clean:
+    run: |
+      melos exec -- sh -c 'flutter clean || true; rm -rf .dart_tool build'
+    description: Clean build artifacts
+
+  clean:deep:
+    run: |
+      melos exec -- sh -c 'git clean -xfd -e "!.vscode" -e "!.idea"'
+    description: Deep clean (CAUTION removes untracked files)
+
+  ensure-lock:
+    run: |
+      melos exec -- sh -c 'test -f pubspec.lock || echo "No lockfile"; true'
+    description: CI helper to verify lockfiles exist
+
+  # ---------- Workspace discovery helpers ----------
+  list:
+    run: melos list
+    description: List all workspace packages
+
+  list:history:
+    run: melos list --scope "*history*"
+    description: List packages matching *history*
+
+  changed:
+    run: melos changed --since origin/main
+    description: Show packages changed since origin/main
+
+  # ---------- Scoped examples ----------
+  gen:history:
+    run: |
+      melos exec --scope "history" -- sh -c '([ -f build.yaml ] && dart run build_runner build -d) || true'
+    description: Codegen only for history package
+
+  analyze:app:
+    run: |
+      melos exec --scope "playground_bloc" -- sh -c 'flutter analyze || dart analyze'
+    description: Analyze only the root app (update scope if your app name differs)
+
+  # ---------- Release (optional) ----------
+  version:
+    run: melos version
+    description: Bump versions using Melos (supports conventional commits)
+
+  publish:
+    run: melos publish
+    description: Publish selected packages (use with caution)
