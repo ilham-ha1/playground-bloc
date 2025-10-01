@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -24,6 +25,8 @@ class _TakePicScreenState extends State<TakePicScreen> {
     final bloc = context.read<TakePicBloc>();
     bloc.add(const TakePicRequestPermission());
     bloc.add(const TakePicInitCamera(lens: CameraLensDirection.front));
+    log("message 2: ${context.read<QuestionereBloc>().hashCode}");
+    log("message 3: ${context.read<TakePicBloc>().hashCode}");
   }
 
   @override
@@ -99,7 +102,7 @@ class _TakePicScreenState extends State<TakePicScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:
-                                bloc.capturedPaths.reversed
+                                bloc.capturedPaths
                                     .take(3)
                                     .map(
                                       (p) => Padding(

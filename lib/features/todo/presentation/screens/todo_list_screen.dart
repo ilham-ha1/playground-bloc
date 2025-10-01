@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:playground_bloc/core/route/route_aware_analytics.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
 
 import '../bloc/todo_bloc.dart';
@@ -15,10 +16,27 @@ class TodoListScreen extends StatefulWidget {
   State<TodoListScreen> createState() => _TodoListScreenState();
 }
 
-class _TodoListScreenState extends State<TodoListScreen> {
+class _TodoListScreenState extends State<TodoListScreen> with RouteAware {
   @override
   void initState() {
     super.initState();
+    context.read<TodoBloc>().add(LoadTodos());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
     context.read<TodoBloc>().add(LoadTodos());
   }
 

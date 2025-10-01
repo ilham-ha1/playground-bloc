@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "playground-bloc",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "playground-bloc (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "playground-bloc (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "history",
+            "cwd": "packages/history",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "history (profile mode)",
+            "cwd": "packages/history",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "history (release mode)",
+            "cwd": "packages/history",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

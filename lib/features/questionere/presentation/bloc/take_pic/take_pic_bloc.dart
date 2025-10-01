@@ -66,7 +66,6 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
     TakePicTakePicture event,
     Emitter<TakePicState> emit,
   ) async {
-    // Enforce max 3 photos: if already 3, return to questionere
     if (_capturedPaths.length >= 3) {
       final ctx = NavigationService.context;
       if (Navigator.of(ctx).canPop()) {
@@ -79,6 +78,8 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
     if (_controller == null || !_controller!.value.isInitialized) return;
     final xfile = await _controller!.takePicture();
 
+    var context = NavigationService.context;
+    if (!context.mounted) return;
     final confirmed =
         await showDialog<bool>(
           context: NavigationService.context,
@@ -111,6 +112,7 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
       // If we've reached 3 photos after confirming, navigate back
       if (_capturedPaths.length >= 3) {
         final ctx = NavigationService.context;
+        if (!ctx.mounted) return;
         if (Navigator.of(ctx).canPop()) {
           Navigator.of(ctx).pop();
         } else {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playground_bloc/features/questionere/presentation/bloc/questionere/questionere_bloc.dart';
@@ -19,6 +21,7 @@ class _QuestionereScreenState extends State<QuestionereScreen> {
   void initState() {
     super.initState();
     context.read<QuestionereBloc>().add(QuestionereInit());
+    log("message 1: ${context.read<QuestionereBloc>().hashCode}");
   }
 
   @override

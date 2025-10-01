@@ -84,7 +84,14 @@ class QuLoadedWidget extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children:
-                  capturedPaths.reversed.take(3).map((path) {
+                  capturedPaths.take(3).toList().asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final path = entry.value;
+
+                    // Tentukan teks berdasarkan index
+                    final texts = ["Foto Depan", "Foto Kanan", "Foto Kiri"];
+                    final label = texts[index];
+
                     return SizedBox(
                       width: 120,
                       child: Column(
@@ -99,9 +106,9 @@ class QuLoadedWidget extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Foto Kamu',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                          Text(
+                            label,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),

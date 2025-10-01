@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
@@ -20,7 +22,7 @@ class QuBottomNavigationBar extends StatelessWidget {
           size: Size(MediaQuery.of(context).devicePixelRatio, 41),
           onPressed: () {
             final qBloc = context.read<QuestionereBloc>();
-            // Reset previously captured photos before starting a new session
+            log("message ${context.read<QuestionereBloc>().hashCode}");
             qBloc.add(const QuestionereEvent.init());
             Navigator.pushNamed(
               context,
