@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import '../bloc/todo_bloc.dart';
 import '../bloc/todo_event.dart';
 
@@ -65,14 +67,17 @@ class _AddTodoDialogState extends State<AddTodoDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+        TextButton(onPressed: () => context.pop(), child: const Text('Cancel')),
         ElevatedButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               context.read<TodoBloc>().add(
-                CreateTodo(title: _titleController.text, description: _descriptionController.text),
+                CreateTodo(
+                  title: _titleController.text,
+                  description: _descriptionController.text,
+                ),
               );
-              Navigator.of(context).pop();
+              context.pop();
             }
           },
           child: const Text('Add Todo'),

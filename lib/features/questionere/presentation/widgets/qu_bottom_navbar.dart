@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
 import 'package:playground_bloc/features/questionere/presentation/bloc/questionere/questionere_bloc.dart';
 import 'package:playground_bloc/features/questionere/presentation/bloc/questionere/questionere_event.dart';
@@ -24,11 +25,7 @@ class QuBottomNavigationBar extends StatelessWidget {
             final qBloc = context.read<QuestionereBloc>();
             log("message ${context.read<QuestionereBloc>().hashCode}");
             qBloc.add(const QuestionereEvent.init());
-            Navigator.pushNamed(
-              context,
-              RouteConstants.photo,
-              arguments: qBloc,
-            );
+            context.go(RouteConstants.photo, extra: qBloc);
           },
           name: "Mulai Ambil Foto",
           textStyle: TextStyle(

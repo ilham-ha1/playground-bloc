@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
 import "package:playground_bloc/shared/styles/color_style.dart";
 
 class AppBarMenu extends StatelessWidget implements PreferredSizeWidget {
@@ -27,8 +28,7 @@ class AppBarMenu extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final canPop =
-        ModalRoute.of(context)?.canPop ?? Navigator.of(context).canPop();
+    final canPop = ModalRoute.of(context)?.canPop ?? context.canPop();
 
     return AppBar(
       backgroundColor: backgroundColor ?? Colors.white,
@@ -54,7 +54,7 @@ class AppBarMenu extends StatelessWidget implements PreferredSizeWidget {
                     isBackEnable == null
                         ? ((onBackPressed != null)
                             ? onBackPressed
-                            : () => Navigator.pop(context))
+                            : () => context.pop(context))
                         : null,
                 icon: Icon(
                   Icons.arrow_back_ios_new,

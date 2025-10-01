@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playground_bloc/core/route/route_aware_analytics.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
 
@@ -52,21 +53,22 @@ class _TodoListScreenState extends State<TodoListScreen> with RouteAware {
           InkWell(
             child: Icon(Icons.note_add_sharp),
             onTap: () {
-              Navigator.pushNamed(context, RouteConstants.reimburstment);
+              // GoRouter.of(context).go(RouteConstants.reimburstmentPath);
+              context.go(RouteConstants.reimburstmentPath);
             },
           ),
           SizedBox(width: 12),
           InkWell(
             child: Icon(Icons.chat),
             onTap: () {
-              Navigator.pushNamed(context, RouteConstants.questionere);
+              context.go(RouteConstants.questionere);
             },
           ),
           SizedBox(width: 12),
           InkWell(
             child: Icon(Icons.history),
             onTap: () {
-              Navigator.pushNamed(context, RouteConstants.history);
+              context.go(RouteConstants.history);
             },
           ),
           SizedBox(width: 12),

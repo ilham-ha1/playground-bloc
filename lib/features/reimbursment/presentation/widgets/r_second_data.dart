@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:playground_bloc/constant/icon_constant.dart';
 import 'package:playground_bloc/features/reimbursment/presentation/bloc/reimbursment/reimbursment_bloc.dart';
@@ -211,7 +212,7 @@ class _AttachmentSheetState extends State<_AttachmentSheet> {
                                   color: ColorStyle.white,
                                 ),
                                 splashRadius: 18,
-                                onPressed: () => Navigator.of(context).pop(),
+                                onPressed: () => context.pop(),
                               ),
                             ],
                           ),
@@ -283,7 +284,7 @@ class _AttachmentSheetState extends State<_AttachmentSheet> {
 
                                       if (!context.mounted) return;
 
-                                      final navigator = Navigator.of(context);
+                                      final navigator = context;
                                       if (!navigator.mounted) return;
 
                                       context.read<ReimbursmentBloc>().add(
@@ -436,7 +437,7 @@ class _AttachmentSheetState extends State<_AttachmentSheet> {
                                         images,
                                       ),
                                     );
-                                    Navigator.pop(context);
+                                    context.pop();
                                   },
                                   name: 'Simpan',
                                   textStyle: const TextStyle(

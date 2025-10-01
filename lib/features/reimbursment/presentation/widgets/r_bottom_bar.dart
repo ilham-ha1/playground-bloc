@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playground_bloc/shared/styles/color_style.dart';
 import 'package:playground_bloc/shared/widget/button_custom.dart';
 
@@ -62,8 +63,7 @@ class ReimbursmentBottomBar extends StatelessWidget {
                                 color: ColorStyle.white,
                               ),
                               splashRadius: 18,
-                              onPressed:
-                                  () => Navigator.of(dialogContext).pop(),
+                              onPressed: () => context.pop(),
                             ),
                           ],
                         ),
@@ -81,8 +81,7 @@ class ReimbursmentBottomBar extends StatelessWidget {
                           children: [
                             Expanded(
                               child: OutlinedButton(
-                                onPressed:
-                                    () => Navigator.of(dialogContext).pop(),
+                                onPressed: () => context.pop(),
                                 style: OutlinedButton.styleFrom(
                                   side: BorderSide(
                                     color: ColorStyle.greyRadioButton,
@@ -95,7 +94,7 @@ class ReimbursmentBottomBar extends StatelessWidget {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(dialogContext).pop();
+                                  context.pop();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: ColorStyle.primary,

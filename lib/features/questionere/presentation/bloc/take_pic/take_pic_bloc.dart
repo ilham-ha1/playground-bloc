@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playground_bloc/core/route/route_constants.dart';
 import 'package:playground_bloc/utils/services/navigation_service.dart';
 
@@ -67,11 +68,11 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
     Emitter<TakePicState> emit,
   ) async {
     if (_capturedPaths.length >= 3) {
-      final ctx = NavigationService.context;
-      if (Navigator.of(ctx).canPop()) {
-        Navigator.of(ctx).pop();
+      final context = NavigationService.context;
+      if (context.canPop()) {
+        context.pop();
       } else {
-        Navigator.of(ctx).pushReplacementNamed(RouteConstants.questionere);
+        context.pushReplacementNamed(RouteConstants.questionere);
       }
       return;
     }
@@ -93,11 +94,11 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () => Navigator.of(ctx).pop(false),
+                    onPressed: () => context.pop(false),
                     child: const Text('Retake'),
                   ),
                   ElevatedButton(
-                    onPressed: () => Navigator.of(ctx).pop(true),
+                    onPressed: () => context.pop(true),
                     child: const Text('Use Photo'),
                   ),
                 ],
@@ -113,10 +114,10 @@ class TakePicBloc extends Bloc<TakePicEvent, TakePicState> {
       if (_capturedPaths.length >= 3) {
         final ctx = NavigationService.context;
         if (!ctx.mounted) return;
-        if (Navigator.of(ctx).canPop()) {
-          Navigator.of(ctx).pop();
+        if (context.canPop()) {
+          context.pop();
         } else {
-          Navigator.of(ctx).pushReplacementNamed(RouteConstants.questionere);
+          context.pushReplacementNamed(RouteConstants.questionere);
         }
         return;
       }

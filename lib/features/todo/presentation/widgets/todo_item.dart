@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../domain/entities/todo.dart';
 import '../bloc/todo_bloc.dart';
@@ -125,7 +126,7 @@ class TodoItem extends StatelessWidget {
             ),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => context.pop(),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
@@ -137,7 +138,7 @@ class TodoItem extends StatelessWidget {
                       description: descriptionController.text,
                     );
                     context.read<TodoBloc>().add(UpdateTodo(updatedTodo));
-                    Navigator.of(context).pop();
+                    context.pop();
                   }
                 },
                 child: const Text('Update'),
@@ -156,13 +157,13 @@ class TodoItem extends StatelessWidget {
             content: const Text('Are you sure you want to delete this todo?'),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => context.pop(),
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
                 onPressed: () {
                   context.read<TodoBloc>().add(DeleteTodo(todo.id!));
-                  Navigator.of(context).pop();
+                  context.pop();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
